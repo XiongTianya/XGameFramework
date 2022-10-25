@@ -1,0 +1,4 @@
+repository "XGameFramework@xiongtianya@cloud.cn"
+  path "/"
+    br "/main"
+    co "/main"
