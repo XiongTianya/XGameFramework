@@ -159,6 +159,24 @@ namespace XGameFramework.Fsm
             {
                 m_CurrentState.OnLeave(this, true);
             }
+            foreach (KeyValuePair<string, FsmState<T>> state in m_States)
+            {
+                state.Value.OnDestroy(this);
+            }
+            Name = null;
+            m_Owner = null;
+            m_States.Clear();
+
+            if (m_Datas != null)
+            {
+                foreach (KeyValuePair<string, Variable> data in m_Datas)
+                {
+                    if (data.Value == null)
+                    {
+                        continue;
+                    }
+                }
+            }
         }
 
     }
