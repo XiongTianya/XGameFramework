@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 namespace XGameFramework.Fsm
 {
-    internal sealed class Fsm<T> : FsmBase, IFsm<T> where T : class
+    internal sealed class Fsm<T> : FsmBase, IReference, IFsm<T> where T : class
     {
         private T m_Owner;
         private readonly Dictionary<Type, FsmState<T>> m_States;
@@ -111,11 +111,12 @@ namespace XGameFramework.Fsm
                 Type stateType = state.GetType();
                 if (fsm.m_States.ContainsKey(stateType))
                 {
-                    throw new GameFrameworkException(Utility.Text.Format("FSM '{0}' state '{1}' is already exist.", new TypeNamePair(typeof(T), name), stateType.FullName));
+                    throw new GameFrameworkException(String.Format("FSM '{0}' state '{1}' is already exist.", new TypeNamePair(typeof(T), name), stateType.FullName));
                 }
                 fsm.m_States.Add(stateType, state);
                 state.OnInit(fsm);
             }
+            return fsm;
         }
 
         public static Fsm<T> Create(string name, T owner, List<FsmState<T>> states)
@@ -144,7 +145,7 @@ namespace XGameFramework.Fsm
                 Type stateType = state.GetType();
                 if (fsm.m_States.ContainsKey(stateType))
                 {
-                    throw new GameFrameworkException(Utility.Text.Format("FSM '{0}' state '{1}' is already exist.", new TypeNamePair(typeof(T), name), stateType.FullName));
+                    throw new GameFrameworkException(string.Format("FSM '{0}' state '{1}' is already exist.", new TypeNamePair(typeof(T), name), stateType.FullName));
                 }
 
                 fsm.m_States.Add(stateType, state);
@@ -160,7 +161,7 @@ namespace XGameFramework.Fsm
             {
                 m_CurrentState.OnLeave(this, true);
             }
-            foreach (KeyValuePair<string, FsmState<T>> state in m_States)
+            foreach (KeyValuePair<Type, FsmState<T>> state in m_States)
             {
                 state.Value.OnDestroy(this);
             }
@@ -195,7 +196,7 @@ namespace XGameFramework.Fsm
             FsmState<T> state = GetState<TState>();
             if (state == null)
             {
-                throw new GameFrameworkException(Utility.Text.Format("FSM '{0}' can not start state '{1}' which is not exist.", new TypeNamePair(typeof(T), Name), typeof(TState).FullName));
+                throw new GameFrameworkException(String.Format("FSM '{0}' can not start state '{1}' which is not exist.", new TypeNamePair(typeof(T), Name), typeof(TState).FullName));
             }
             m_CurrentStateTime = 0f;
             m_CurrentState = state;
@@ -216,12 +217,12 @@ namespace XGameFramework.Fsm
 
             if (!typeof(FsmState<T>).IsAssignableFrom(stateType))
             {
-                throw new GameFrameworkException(Utility.Text.Format("State type '{0}' is invalid.", stateType.FullName));
+                throw new GameFrameworkException(String.Format("State type '{0}' is invalid.", stateType.FullName));
             }
             FsmState<T> state = GetState(stateType);
             if (state == null)
             {
-                throw new GameFrameworkException(Utility.Text.Format("FSM '{0}' can not start state '{1}' which is not exist.", new TypeNamePair(typeof(T), Name), typeof(TState).FullName));
+                throw new GameFrameworkException(String.Format("FSM '{0}' can not start state '{1}' which is not exist.", new TypeNamePair(typeof(T), Name), stateType.FullName));
             }
             m_CurrentStateTime = 0f;
             m_CurrentState = state;
@@ -241,7 +242,7 @@ namespace XGameFramework.Fsm
             }
             if (!typeof(FsmState<T>).IsAssignableFrom(stateType))
             {
-                throw new GameFrameworkException(Utility.Text.Format("State type '{0}' is invalid.", stateType.FullName));
+                throw new GameFrameworkException(String.Format("State type '{0}' is invalid.", stateType.FullName));
             }
             return m_States.ContainsKey(stateType);
         }
@@ -266,7 +267,7 @@ namespace XGameFramework.Fsm
 
             if (!typeof(FsmState<T>).IsAssignableFrom(stateType))
             {
-                throw new GameFrameworkException(Utility.Text.Format("State type '{0}' is invalid.", stateType.FullName));
+                throw new GameFrameworkException(String.Format("State type '{0}' is invalid.", stateType.FullName));
             }
 
             FsmState<T> state = null;
@@ -281,7 +282,7 @@ namespace XGameFramework.Fsm
         public FsmState<T>[] GetAllStates()
         {
             int index = 0;
-            FsmState<T>[] results = new FsmState<T>(m_States.Count);
+            FsmState<T>[] results = new FsmState<T>[m_States.Count];
             foreach (KeyValuePair<Type, FsmState<T>> state in m_States)
             {
                 results[index++] = state.Value;
@@ -424,7 +425,7 @@ namespace XGameFramework.Fsm
             FsmState<T> state = GetState(stateType);
             if (state == null)
             {
-                throw new GameFrameworkException(Utility.Text.Format("FSM '{0}' can not change state to '{1}' which is not exist.", new TypeNamePair(typeof(T), Name), stateType.FullName));
+                throw new GameFrameworkException(String.Format("FSM '{0}' can not change state to '{1}' which is not exist.", new TypeNamePair(typeof(T), Name), stateType.FullName));
             }
 
             m_CurrentState.OnLeave(this, false);

@@ -354,6 +354,7 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.VSCode.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
+"Assets/Framework/Base/DataStruct/TypeNamePair.cs"
 "Assets/Framework/Base/GameFrameworkException.cs"
 "Assets/Framework/Base/ReferencePool/IReference.cs"
 "Assets/Framework/Base/ReferencePool/ReferencePool.cs"
@@ -365,6 +366,7 @@
 "Assets/Framework/Fsm/FsmBase.cs"
 "Assets/Framework/Fsm/FsmState.cs"
 "Assets/Framework/Fsm/IFsm.cs"
+"Assets/Scripts/Tets.cs"
 -langversion:9.0
 
 /deterministic

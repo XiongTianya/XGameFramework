@@ -8,7 +8,7 @@ namespace XGameFramework
         {
             private readonly Queue<IReference> m_References;
             private readonly Type m_ReferenceType;
-            private int m_UsingReferneceCount;
+            private int m_UsingReferenceCount;
             private int m_AcquireReferenceCount;
             private int m_ReleaseReferenceCount;
             private int m_AddReferenceCount;
@@ -17,7 +17,8 @@ namespace XGameFramework
             public ReferenceCollection(Type referenceType)
             {
                 m_References = new Queue<IReference>();
-                m_UsingReferneceCount = 0;
+                m_ReferenceType = referenceType;
+                m_UsingReferenceCount = 0;
                 m_AcquireReferenceCount = 0;
                 m_ReleaseReferenceCount = 0;
                 m_AddReferenceCount = 0;
@@ -126,7 +127,7 @@ namespace XGameFramework
                     }
                     m_References.Enqueue(reference);
                     m_ReleaseReferenceCount++;
-                    m_UsingReferneceCount--;
+                    m_UsingReferenceCount--;
                 }
             }
 
@@ -153,7 +154,7 @@ namespace XGameFramework
                     m_AddReferenceCount += count;
                     while (count-- > 0)
                     {
-                        m_References.Enqueue((IReference)Acquire.CreateInstance(m_ReferenceType));
+                        m_References.Enqueue((IReference)Activator.CreateInstance(m_ReferenceType));
                     }
                 }
             }

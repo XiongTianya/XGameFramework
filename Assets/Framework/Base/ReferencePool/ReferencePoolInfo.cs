@@ -79,5 +79,14 @@ namespace XGameFramework
                 return m_RemoveReferenceCount;
             }
         }
+
+        public string infoDesc
+        {
+            get
+            {
+                return String.Format("Type:{0}\nUnusedReferenceCount:{1}\nUsingReferenceCount:{2}\nAcquireReferenceCount:{3}\nReleaseReferenceCount:{4}\nAddReferenceCount:{5}\nRemoveReferenceCount:{6}"
+                , m_Type, m_UnusedReferenceCount, m_UsingReferenceCount, m_AcquireReferenceCount, m_ReleaseReferenceCount, m_AddReferenceCount, m_RemoveReferenceCount);
+            }
+        }
     }
 }

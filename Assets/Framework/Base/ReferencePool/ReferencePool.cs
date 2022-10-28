@@ -43,6 +43,33 @@ namespace XGameFramework
             return resules;
         }
 
+        public static ReferencePoolInfo GetReferencePoolInfo<T>()
+        {
+            Type referenceType = typeof(T);
+            ReferenceCollection referenceCollection = null;
+            if (!s_ReferenceCollections.TryGetValue(referenceType, out referenceCollection))
+            {
+                throw new GameFrameworkException("ReferenceCollection is invalid.");
+            }
+            ReferencePoolInfo referencePoolInfo = new ReferencePoolInfo(referenceType, referenceCollection.UnusedReferenceCount, referenceCollection.UsingReferenceCount, referenceCollection.AcquireReferenceCount, referenceCollection.ReleaseReferenceCount, referenceCollection.AddReferenceCount, referenceCollection.RemoveReferenceCount);
+            return referencePoolInfo;
+        }
+
+        public static ReferencePoolInfo GetReferencePoolInfo(Type referenceType)
+        {
+            if (referenceType == null)
+            {
+                throw new GameFrameworkException("Reference is invalid.");
+            }
+            ReferenceCollection referenceCollection = null;
+            if (!s_ReferenceCollections.TryGetValue(referenceType, out referenceCollection))
+            {
+                throw new GameFrameworkException("ReferenceCollection is invalid.");
+            }
+            ReferencePoolInfo referencePoolInfo = new ReferencePoolInfo(referenceType, referenceCollection.UnusedReferenceCount, referenceCollection.UsingReferenceCount, referenceCollection.AcquireReferenceCount, referenceCollection.ReleaseReferenceCount, referenceCollection.AddReferenceCount, referenceCollection.RemoveReferenceCount);
+            return referencePoolInfo;
+        }
+
         public static void ClearAll()
         {
             lock (s_ReferenceCollections)
@@ -145,6 +172,7 @@ namespace XGameFramework
                     s_ReferenceCollections.Add(referenceType, referenceCollection);
                 }
             }
+            return referenceCollection;
         }
 
     }
