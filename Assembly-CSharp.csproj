@@ -37,18 +37,24 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets\Framework\Base\Variable\GenericVariable.cs" />
+     <Compile Include="Assets\Framework\Base\GameFrameworkModule.cs" />
+     <Compile Include="Assets\Framework\Fsm\IFsmManager.cs" />
      <Compile Include="Assets\Framework\Base\ReferencePool\ReferencePoolInfo.cs" />
+     <Compile Include="Assets\Framework\Procedure\ProcedureBase.cs" />
      <Compile Include="Assets\Framework\Base\Variable\Variable.cs" />
+     <Compile Include="Assets\Framework\Base\DataStruct\TypeNamePair.cs" />
+     <Compile Include="Assets\Scripts\Tets.cs" />
      <Compile Include="Assets\Framework\Fsm\FsmState.cs" />
      <Compile Include="Assets\Framework\Base\ReferencePool\ReferencePool.ReferenceCollection.cs" />
      <Compile Include="Assets\Framework\Base\ReferencePool\IReference.cs" />
+     <Compile Include="Assets\Framework\Fsm\FsmManager.cs" />
      <Compile Include="Assets\Framework\Base\GameFrameworkException.cs" />
      <Compile Include="Assets\Framework\Fsm\FsmBase.cs" />
+     <Compile Include="Assets\Framework\Procedure\ProcedureManager.cs" />
      <Compile Include="Assets\Framework\Fsm\IFsm.cs" />
      <Compile Include="Assets\Framework\Fsm\Fsm.cs" />
+     <Compile Include="Assets\Framework\Procedure\IProcedureManager.cs" />
      <Compile Include="Assets\Framework\Base\ReferencePool\ReferencePool.cs" />
-     <Compile Include="Assets\Framework\Base\DataStruct\TypeNamePair.cs" />
-     <Compile Include="Assets\Scripts\Tets.cs" />
     <Reference Include="UnityEngine">
         <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.11f1c2\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>

@@ -14,6 +14,18 @@ namespace XGameFramework.Procedure
             get;
         }
 
-        //void Initialize(IFsmManager)
+        void Initialize(IFsmManager fsmManager, params ProcedureBase[] procedures);
+
+        void StartProcedure<T>() where T : ProcedureBase;
+
+        void StartProcedure(Type ProcedureType);
+
+        bool HasProcedure<T>() where T : ProcedureBase;
+
+        bool HasProcedure(Type procedureType);
+
+        ProcedureBase GetProcedure<T>() where T : ProcedureBase;
+
+        ProcedureBase GetProcedure(Type procedureType);
     }
 }
