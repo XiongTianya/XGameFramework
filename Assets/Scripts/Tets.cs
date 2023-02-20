@@ -4,10 +4,20 @@ using UnityEngine;
 using XGameFramework;
 using XGameFramework.Procedure;
 using XGameFramework.Fsm;
+
+using XGameFramework.Event;
+using XGameFramework.Components;
 using ProcedureOwner = XGameFramework.Fsm.IFsm<XGameFramework.Procedure.IProcedureManager>;
+//EventManager eventManager = new EventManager();
+
+
+
 
 public class Tets : MonoBehaviour
 {
+
+    //public GameObject camera;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -61,9 +71,18 @@ public class ProcedureTest1 : XGameFramework.Procedure.ProcedureBase
     //ProcedureOwner procedureOwner = null;
     protected override internal void OnInit(ProcedureOwner procedureOwner)
     {
-        procedureOwner = procedureOwner;
+        //procedureOwner = procedureOwner;
         base.OnInit(procedureOwner);
         Debug.Log("OnInit ProcedureTest1");
+
+
+        //Test Event
+        Components.eventComponent.Subscribe(1, subscribe);
+    }
+
+    private void subscribe(object sender, GameEventArgs e)
+    {
+        Debug.Log("------subscribe");
     }
 
     protected override internal void OnEnter(ProcedureOwner procedureOwner)
@@ -101,6 +120,9 @@ public class ProcedureTest2 : XGameFramework.Procedure.ProcedureBase
     {
         base.OnEnter(procedureOwner);
         Debug.Log("OnEnter ProcedureTest2");
+
+        GameEventArgs obj = new GameEventArgs();
+        Components.eventComponent.Fire(this, obj);
     }
 
     protected override internal void OnLeave(ProcedureOwner procedureOwner, bool isShutdown)

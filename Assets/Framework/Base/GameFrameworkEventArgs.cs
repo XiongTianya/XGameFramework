@@ -8,7 +8,7 @@
 using System;
 namespace XGameFramework
 {
-    public abstract class GameFrameworkEventArgs : EventArgs
+    public abstract class GameFrameworkEventArgs : EventArgs, IReference
     {
         public GameFrameworkEventArgs()
         {
