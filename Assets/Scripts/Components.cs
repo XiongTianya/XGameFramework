@@ -13,8 +13,18 @@ namespace XGameFramework.Components
 
         public static EventManager eventComponent
         {
-            get;
-            private set;
+            // get;
+            // private set;
+
+            get
+            {
+                if (m_eventComponent == null)
+                {
+                    m_eventComponent = new EventManager();
+                }
+                return m_eventComponent;
+            }
+
         }
     }
 }

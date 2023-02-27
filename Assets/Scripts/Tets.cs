@@ -45,6 +45,7 @@ public class Tets : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Components.eventComponent.Update(Time.deltaTime, Time.unscaledDeltaTime);
 
     }
 
@@ -77,7 +78,7 @@ public class ProcedureTest1 : XGameFramework.Procedure.ProcedureBase
 
 
         //Test Event
-        Components.eventComponent.Subscribe(1, subscribe);
+        Components.eventComponent.Subscribe(TestGameEventArgs.EventId, subscribe);
     }
 
     private void subscribe(object sender, GameEventArgs e)
@@ -121,7 +122,7 @@ public class ProcedureTest2 : XGameFramework.Procedure.ProcedureBase
         base.OnEnter(procedureOwner);
         Debug.Log("OnEnter ProcedureTest2");
 
-        GameEventArgs obj = new GameEventArgs();
+        GameEventArgs obj = new TestGameEventArgs();
         Components.eventComponent.Fire(this, obj);
     }
 
